@@ -6,29 +6,18 @@ import Header from "../components/Header";
 export default function NewsPage() {
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const apiKey = "88db5050daf3437f89ca1c351d6935a9"; // Hardcoded API key
         const response = await fetch(
-          `https://newsapi.org/v2/everything?q=music&from=2024-12-01&to=2024-12-31&sortBy=popularity&apiKey=${apiKey}`
+          `https://newsapi.org/v2/everything?q=music&from=2025-02-20&to=2025-02-25&sortBy=popularity&apiKey=88db5050daf3437f89ca1c351d6935a9
+`
         );
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
         const data = await response.json();
-        if (!data.articles) {
-          throw new Error("No articles found in the response.");
-        }
-
         setNews(data.articles);
       } catch (error) {
-        console.error("Error fetching news:", error.message);
-        setError(error.message);
+        console.error("Error fetching news:", error);
       } finally {
         setLoading(false);
       }
@@ -63,12 +52,18 @@ export default function NewsPage() {
                     <div className="h-4 bg-gray-800/50 rounded mb-2 w-full" />
                     <div className="h-4 bg-gray-800/50 rounded mb-2 w-5/6" />
                     <div className="h-4 bg-gray-800/50 rounded w-1/4" />
+                    <div className="h-6 bg-gray-800/50 rounded mb-4 w-3/4" />
+                    <div className="h-4 bg-gray-800/50 rounded mb-2 w-full" />
+                    <div className="h-4 bg-gray-800/50 rounded mb-2 w-5/6" />
+                    <div className="h-4 bg-gray-800/50 rounded w-1/4" />
+                    <div className="h-6 bg-gray-800/50 rounded mb-4 w-3/4" />
+                    <div className="h-4 bg-gray-800/50 rounded mb-2 w-full" />
+                    <div className="h-4 bg-gray-800/50 rounded mb-2 w-5/6" />
+                    <div className="h-4 bg-gray-800/50 rounded w-1/4" />
                   </div>
                 </div>
               ))}
             </div>
-          ) : error ? (
-            <div className="text-center text-red-500">{error}</div>
           ) : (
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {news?.map((article, index) => (
